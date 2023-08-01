@@ -17,6 +17,12 @@ function App() {
 
     fetchData();
   }, [])
+
+  if(!data) {
+    return(
+      <p> No data... </p>
+    )
+  }
   
 
   return (
