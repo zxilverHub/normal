@@ -1,44 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([]);
 
-  // useEffect(()=>{
-  //   async function fetchData(){
-  //     try {
-  //       const res = await fetch(`https://restcountries.com/v3.1/all`)
-  //       const datas = await res.json();
-  //       setData(datas)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all');
+        setData(response.data);
+      } catch (error) {
+        console.log('Error fetching data:', error);
+      }
+    }
 
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
+    fetchData();
+  }, []);
 
-  //   fetchData();
-  // }, [])
+  if(!data) {
+    return (
+      <p>No data</p>
+    )
+  }
 
-  // if(!data) {
-  //   return(
-  //     <p> No data... </p>
-  //   )
-  // } else {
-  //   return (
-  //     <div>
-  //       <p>HEll</p>
-  //       { data.map((d, i)=>(
-  //         <p key={i}>{d?.name?.common}</p>
-  //       )) }
-  //     </div>
-  //   )
-  // }
   return (
-    <>
-      <p>hello</p>
-    </>
-  )
-  
- 
+    <div>
+      {data.map((country, i) => (
+        <p key={i}>{country?.name?.common}</p>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;
