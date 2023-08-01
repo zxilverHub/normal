@@ -22,16 +22,17 @@ function App() {
     return(
       <p> No data... </p>
     )
+  } else {
+    return (
+      <div>
+        { data.map((d, i)=>(
+          <p key={i}>{d?.name?.common}</p>
+        )) }
+      </div>
+    )
   }
   
-
-  return (
-    <div>
-      { data.map((d, i)=>(
-        <p key={i}>{d?.name?.common}</p>
-      )) }
-    </div>
-  )
+ 
 }
 
 export default App
